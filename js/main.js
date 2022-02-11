@@ -1,6 +1,7 @@
 //initialize function called when the script loads
 function initialize() {
     cities();
+    jsAjax();
 };
 //function to create a table with cities and their populations
 function cities() {
@@ -123,7 +124,28 @@ function addEvents() {
 };
 
 
-
-
 //calls the initialize function when the window has loaded
-document.addEventListener('DOMContentLoaded', initialize) 
+document.addEventListener('DOMContentLoaded', initialize)
+
+
+function jsAjax(){
+	
+	var myData;
+	
+
+	fetch('data/MegaCities.geojson')
+   
+            .then(function(response){
+                return response.json();
+            }) 
+            .then(function(response){
+                myData = response;
+    
+                //check the data
+                console.log(myData)
+                document.querySelector("#mydiv").insertAdjacentHTML('beforeend', '<br>GeoJSON data: ' + JSON.stringify(myData))
+            }) 
+    
+       
+        
+    };
